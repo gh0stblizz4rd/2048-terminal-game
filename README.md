@@ -2,6 +2,11 @@
 
 A command line version of the [2048 game](https://play2048.co/) made using python.
 
+<p align="center">
+    <img src="https://i.imgur.com/gryAQou.png" />
+    <img src="https://i.imgur.com/52DRou7.png" />
+</p>
+
 ### Run the game
 
     git clone https://github.com/gh0stblizz4rd/2048-terminal-game
