@@ -4,8 +4,8 @@ A command line version of the [2048 game](https://play2048.co/) made using pytho
 
 ### Run the game
 
-    git clone repolink
-    cd reponame
+    git clone https://github.com/gh0stblizz4rd/2048-terminal-game
+    cd 2048-terminal-game
     pip install colored getkey
     python3 main.py
 
