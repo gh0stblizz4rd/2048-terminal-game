@@ -18,6 +18,7 @@ asciiLogo = f"""
 
                       {whiteBg}By gh0stblizz4rd{Style.reset}
 """
+repoLink = "https://github.com/gh0stblizz4rd/2048-terminal-game"
 
 gameInstructions = """
 2048 is a captivating puzzle game where the objective is to combine 
@@ -79,7 +80,8 @@ def printStartScreen():
     print(f"{' '*26}{whiteFg}U - Uncolored mode{Style.reset}")
     print(f"{' '*26}{whiteFg}H - How to play{Style.reset}")
     print(f"{' '*26}{whiteFg}Q - Quit{Style.reset}")
-    print("\n"*3)    
+    print("\n"*7)
+    print(f"{' '*10}{whiteFg}{repoLink}{Style.reset}")
    
 
 def getNumberColor(number):
