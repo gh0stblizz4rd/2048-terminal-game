@@ -6,7 +6,7 @@ textColor = f"{Fore.rgb(0, 0, 0)}"
 whiteBg = f"{Back.white}{Fore.black}"
 whiteFg = f"{Fore.white}"
 
-asciiLogo = """  
+asciiLogo = f"""  
   /$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$ 
  /$$__  $$ /$$$_  $$| $$  | $$ /$$__  $$
 |__/  \ $$| $$$$\ $$| $$  | $$| $$  \ $$
@@ -15,6 +15,8 @@ asciiLogo = """
 | $$      | $$ \ $$$      | $$| $$  \ $$
 | $$$$$$$$|  $$$$$$/      | $$|  $$$$$$/
 |________/ \______/       |__/ \______/ 
+
+                      {whiteBg}By gh0stblizz4rd{Style.reset}
 """
 
 gameInstructions = """
@@ -70,7 +72,7 @@ def printStartScreen():
                 print(char, end='')
 
         print("")
-    print("\n"*3)
+    print("\n"*5)
 
     print(centerText(f"{whiteBg}Choose an option by pressing a key{Style.reset}\n", 93))
     print(f"{' '*26}{whiteFg}S - Start game{Style.reset}")
