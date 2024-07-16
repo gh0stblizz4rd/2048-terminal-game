@@ -98,3 +98,5 @@ while True:
                 run(["clear"])
                 gameOver(getScore(), colored)
                 break
+        elif pressedKey == "q" or pressedKey == "Q":
+            break
