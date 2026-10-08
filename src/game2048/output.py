@@ -4,7 +4,7 @@ from colored import Fore, Back, Style
 gridColor = f"{Back.rgb(120, 120, 120)}"
 textColor = f"{Fore.rgb(0, 0, 0)}"
 whiteBg = f"{Back.white}{Fore.black}"
-whiteFg = f"{Fore.white}"
+# whiteFg = f"{Fore.white}"
 
 asciiLogo = f"""  
   /$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$ 
@@ -76,12 +76,12 @@ def printStartScreen():
     print("\n"*5)
 
     print(centerText(f"{whiteBg}Choose an option by pressing a key{Style.reset}\n", 93))
-    print(f"{' '*26}{whiteFg}S - Start game{Style.reset}")
-    print(f"{' '*26}{whiteFg}U - Uncolored mode{Style.reset}")
-    print(f"{' '*26}{whiteFg}H - How to play{Style.reset}")
-    print(f"{' '*26}{whiteFg}Q - Quit{Style.reset}")
+    print(f"{' '*26}{whiteBg}S - Start game{Style.reset}")
+    print(f"{' '*26}{whiteBg}U - Uncolored mode{Style.reset}")
+    print(f"{' '*26}{whiteBg}H - How to play{Style.reset}")
+    print(f"{' '*26}{whiteBg}Q - Quit{Style.reset}")
     print("\n"*7)
-    print(f"{' '*10}{whiteFg}{repoLink}{Style.reset}")
+    print(f"{' '*10}{whiteBg}{repoLink}{Style.reset}")
    
 
 def getNumberColor(number):
@@ -206,12 +206,12 @@ def legacyGameBoard(numbersList, score):
 
 def gameOver(score, colored):
     if colored:
-        scoreNumLine = f"{whiteBg}##{Style.reset}{centerText(f'{whiteFg}Score: {score}{Style.reset}', 32, colored=False)}{whiteBg}##{Style.reset}"
+        scoreNumLine = f"{whiteBg}##{Style.reset}{centerText(f'{whiteBg}Score: {score}{Style.reset}', 32, colored=False)}{whiteBg}##{Style.reset}"
 
         print("\n"*7, end='')
         print(centerText(f"{whiteBg}{'#'*22}{Style.reset}", 90))
         print(centerText(f"{whiteBg}##{Style.reset}{' '*18}{whiteBg}##{Style.reset}", 113))
-        print(centerText(f"{whiteBg}##{Style.reset}    {whiteFg}Game over!{Style.reset}    {whiteBg}##{Style.reset}", 128, colored=False))
+        print(centerText(f"{whiteBg}##{Style.reset}    {whiteBg}Game over!{Style.reset}    {whiteBg}##{Style.reset}", 128, colored=False))
         print(centerText(scoreNumLine, 127, colored=False))
         print(centerText(f"{whiteBg}##{Style.reset}{' '*18}{whiteBg}##{Style.reset}", 113))
         print(centerText(f"{whiteBg}{'#'*22}{Style.reset}", 90))
