@@ -1,7 +1,9 @@
-from output import *
-from gameCore import *
+
+from .output import *
+from .gameCore import *
 import os
 from subprocess import run
+
 
 if os.name == "nt":
     import msvcrt
@@ -18,21 +20,25 @@ else:
     clearTerminalCommand = "clear"
 
     def readKey():
-        key = getkey()
-        return key
-
-run(clearTerminalCommand, shell=True)
-printStartScreen()
+        return getkey()
 
 
-        
-if __name__ == "__main__":
+def continueGame(printGameBoardFunc, gameList):
+    run(clearTerminalCommand, shell=True)
+    newPointCords = generateNewCords(gameList)
+    gameList[newPointCords[0]][newPointCords[1]] = chooseNewNum(getScore())
+    printGameBoardFunc(gameList, getScore())
+
+
+def main():
+    run(clearTerminalCommand, shell=True)
+    printStartScreen()
 
     while True:
         try:
             pressedKey = readKey()
         except KeyboardInterrupt:
-            exit(0)
+            return
         else:
             if pressedKey == "s" or pressedKey == "S":
                 updateGameBoardFunc = coloredGameBoard
@@ -49,15 +55,7 @@ if __name__ == "__main__":
                 run(clearTerminalCommand, shell=True)
                 printStartScreen()
             elif pressedKey == "q" or pressedKey == "Q":
-                exit(0)
-
-
-    def continueGame(printGameBoardFunc):
-        run(clearTerminalCommand, shell=True)
-        newPointCords = generateNewCords(gameList)
-        gameList[newPointCords[0]][newPointCords[1]] = chooseNewNum(getScore())
-        printGameBoardFunc(gameList, getScore())
-
+                return
 
     gameList = [
         [0, 0, 0, 0],
@@ -66,13 +64,9 @@ if __name__ == "__main__":
         [0, 0, 0, 0]
     ]
 
-
-    continueGame(updateGameBoardFunc)
-
-
+    continueGame(updateGameBoardFunc, gameList)
 
     while True:
-
         try:
             pressedKey = readKey()
         except KeyboardInterrupt:
@@ -83,7 +77,7 @@ if __name__ == "__main__":
                 updatedVerticalList = handleVerticalLines(gameList, "up")
                 gameList = convertVerticalLines(updatedVerticalList)
                 if gameStatus(prevGameList, gameList):
-                    continueGame(updateGameBoardFunc)
+                    continueGame(updateGameBoardFunc, gameList)
                 else:
                     run(clearTerminalCommand, shell=True)
                     gameOver(getScore(), colored)
@@ -94,17 +88,17 @@ if __name__ == "__main__":
                 updatedVerticalList = handleVerticalLines(gameList, "down")
                 gameList = convertVerticalLines(updatedVerticalList)
                 if gameStatus(prevGameList, gameList):
-                    continueGame(updateGameBoardFunc)
+                    continueGame(updateGameBoardFunc, gameList)
                 else:
                     run(clearTerminalCommand, shell=True)
                     gameOver(getScore(), colored)
                     break
-            
+
             elif pressedKey == "d" or pressedKey == "D":
                 prevGameList = gameList
                 gameList = handleHorizontalLines(gameList, "right")
                 if gameStatus(prevGameList, gameList):
-                    continueGame(updateGameBoardFunc)
+                    continueGame(updateGameBoardFunc, gameList)
                 else:
                     run(clearTerminalCommand, shell=True)
                     gameOver(getScore(), colored)
@@ -114,10 +108,15 @@ if __name__ == "__main__":
                 prevGameList = gameList
                 gameList = handleHorizontalLines(gameList, "left")
                 if gameStatus(prevGameList, gameList):
-                    continueGame(updateGameBoardFunc)
+                    continueGame(updateGameBoardFunc, gameList)
                 else:
                     run(clearTerminalCommand, shell=True)
                     gameOver(getScore(), colored)
                     break
+
             elif pressedKey == "q" or pressedKey == "Q":
                 break
+
+
+if __name__ == "__main__":
+    main()
