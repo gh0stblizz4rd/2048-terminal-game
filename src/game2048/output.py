@@ -205,27 +205,31 @@ def legacyGameBoard(numbersList, score):
 
 
 def gameOver(score, colored):
-    if colored:
-        scoreNumLine = f"{whiteBg}##{Style.reset}{centerText(f'{whiteBg}Score: {score}{Style.reset}', 32, colored=False)}{whiteBg}##{Style.reset}"
+    boxWidth = 22
+    innerWidth = boxWidth - 4
+    margin = " " * ((68 - boxWidth) // 2)
 
-        print("\n"*7, end='')
-        print(centerText(f"{whiteBg}{'#'*22}{Style.reset}", 90))
-        print(centerText(f"{whiteBg}##{Style.reset}{' '*18}{whiteBg}##{Style.reset}", 113))
-        print(centerText(f"{whiteBg}##{Style.reset}    {whiteBg}Game over!{Style.reset}    {whiteBg}##{Style.reset}", 128, colored=False))
-        print(centerText(scoreNumLine, 127, colored=False))
-        print(centerText(f"{whiteBg}##{Style.reset}{' '*18}{whiteBg}##{Style.reset}", 113))
-        print(centerText(f"{whiteBg}{'#'*22}{Style.reset}", 90))
-        print("\n"*7, end='')
-    
-    else:
-        scoreNumLine = f"##{centerText(f'Score: {score}', 18, colored=False)}##"
+    # Layout is worked out on plain text, colors are added last, so their
+    # invisible escape codes can never affect the positioning.
+    def paint(text):
+        return f"{whiteBg}{text}{Style.reset}" if colored else text
 
-        print("\n"*7, end='')
-        print(centerText(f"{'#'*22}", 68, colored=False))
-        print(centerText(f"##{' '*18}##", 68, colored=False))
-        print(centerText(f"##    Game over!    ##", 68, colored=False))
-        print(centerText(scoreNumLine, 68, colored=False))
-        print(centerText(f"##{' '*18}##", 68, colored=False))
-        print(centerText(f"{'#'*22}", 68, colored=False))
-        print("\n"*7, end='')
+    def boxRow(text=""):
+        padded = centerText(text, innerWidth, colored=False)
+        if text:
+            padded = padded.replace(text, paint(text))
+        return f"{paint('##')}{padded}{paint('##')}"
 
+    rows = [
+        paint("#" * boxWidth),
+        boxRow(),
+        boxRow("Game over!"),
+        boxRow(f"Score: {score}"),
+        boxRow(),
+        paint("#" * boxWidth),
+    ]
+
+    print("\n"*7, end='')
+    for row in rows:
+        print(f"{margin}{row}")
+    print("\n"*7, end='')
